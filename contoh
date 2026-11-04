@@ -1,0 +1,35 @@
+Gue punya dua file:
+1. HTML "Peta KPI KSPM FEB UB" (cover PM dan PR sudah bergerak, cover WM sudah diganti dan bergerak)
+2. PDF Evaluation Report Creative Marketing (kode departemen: CM)
+
+KONDISI SAAT INI
+Di HTML, cover CM masih memakai foto tim People Management dengan tulisan "Creative Marketing". Itu placeholder dan harus diganti.
+
+TUJUAN
+Ganti cover CM di HTML dengan cover dari PDF CM, lalu buat bergerak (parallax + animasi) seperti cover PM, PR, dan WM.
+
+TAHAP 1 - Samakan gaya visual orang dengan PM
+- Foto anggota CM JANGAN diganti. Jangan pakai wajah orang dari tim lain.
+- Ekstrak layer gambar dan mask tiap orang dari PDF CM.
+- Ukur statistik warna (LAB) orang di cover PM versus PDF CM, lalu terapkan satu koreksi warna, kontras, dan kehangatan yang SAMA ke semua orang CM. Jaga warna putih (kaos/celana) agar tidak jadi oranye.
+- Simpan sebagai PDF revisi. Jangan ubah elemen lain (background, judul, logo, bunga, teks, ukuran halaman).
+- Bandingkan PM, PDF CM asli, dan PDF CM revisi berdampingan. Jelaskan apa yang tidak bisa disamakan (pose, komposisi, jumlah orang).
+
+TAHAP 2 - Masukkan ke HTML
+- Pecah cover PDF CM jadi layer terpisah dengan memfilter operator konten PDF: background, kota, bunga atas, judul, tiap orang, overlay gradien, bunga bawah, logo, subjudul. Cek dulu struktur layer PDF CM karena bisa beda dari WM (jumlah orang, urutan, posisi).
+- Render tiap layer transparan, tumpuk ulang, dan pastikan hasilnya identik dengan render PDF penuh.
+- Kota dan bunga pakai gambar asli yang tidak terpotong, dengan posisi dan rotasi dari matriks PDF.
+- Susun seperti cover WM: layer .ly dengan --k berbeda untuk kota, judul, barisan orang belakang, barisan orang depan, dan subjudul. Pertahankan urutan tumpukan asli PDF. Bagi barisan belakang dan depan sesuai ukuran dan posisi orang di PDF CM.
+- Orang pakai class .pp, bunga pakai class .fl, logo di .lg.
+- Hanya aktif untuk CM (blok `if(curC==='CM')`). Jangan ubah PM, PR, WM, atau departemen lain.
+- Semua aset tertanam sebagai data URI WebP, tanpa dependensi eksternal baru.
+
+TAHAP 3 - Verifikasi dan publish
+- Buka halaman #dept-CM di browser headless, geser kursor, pastikan parallax jalan dan tidak ada error JavaScript.
+- Pastikan cover WM, PM, dan PR tidak berubah.
+- Publish ulang ke artifact yang sama dan kasih link.
+
+ATURAN
+- Jangan desain ulang apa pun yang tidak diminta.
+- Kalau ada yang ambigu, tanya dulu sebelum mengubah.
+- Di akhir, jelaskan apa yang berubah, apa yang tidak, dan keterbatasannya.
